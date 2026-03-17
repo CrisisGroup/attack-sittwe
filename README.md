@@ -1,2 +1,2 @@
 # attack-sittwe
-Sittwe single-page explainer
+For hosting the single page explainer on Sittwe in Myanmar. 

@@ -1,0 +1,650 @@
+/* ---------- Global ---------- */
+
+:root {
+  --bg: #050505;
+  --fg: #f5f5f5;
+  --accent: #f15b37;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  overflow-x: clip;
+}
+
+body {
+  background: var(--bg);
+  color: var(--fg);
+  font-family: "PT Serif", serif;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "franklin-gothic-urw-cond", sans-serif;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+h2 {
+  color: #d48a77;
+  letter-spacing: 0.15rem;
+  font-size: 1.3rem;
+  margin-top: 3rem;
+}
+
+p {
+  line-height: 1.7;
+  font-size: 1.2rem;
+  text-align: left;
+  font-family: pt-serif, serif;
+  margin-top: 8px;
+}
+
+a {
+  color: #d77c65;
+  font-weight: bold;
+}
+
+a:hover {
+  color: #fff;
+}
+
+a.readmore {
+  font-family: "franklin-gothic-urw", sans-serif;
+  text-underline-offset: 4px;
+  text-decoration-style: dotted;
+  font-size: 1rem;
+  color: #bd4f34;
+}
+
+/* ---------- Hero (short editorial video header) ---------- */
+
+.hero {
+  width: 100%;
+  background: var(--bg);
+}
+
+.hero__video-wrap {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 21 / 9;
+}
+
+.hero__video {
+  position: absolute;
+  top: 55%;
+  left: 50%;
+  min-width: 90%;
+  min-height: 90%;
+  width: 90%;
+  height: 90%;
+  transform: translate(-50%, -50%);
+  object-fit: cover;
+  padding: 10px;
+}
+
+@media (max-width: 425px) {
+  .hero__video {
+    top: 50%;
+    left: 50%;
+    min-width: 100%;
+    min-height: 100%;
+    width: 100%;
+    height: 100%;
+    transform: translate(-50%, -50%);
+    object-fit: cover;
+    padding: 0;
+  }
+}
+
+.hero__text {
+  max-width: 1220px;
+  margin: 0 auto;
+  padding: 5rem 0 0;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.hero h1 {
+  font-size: clamp(2.5rem, 8vw, 5rem);
+  margin: 0 3vw;
+  max-width: 34ch;
+  color: #bd4f34;
+  text-transform: none !important;
+}
+
+.hero__byline,
+.hero__dateline {
+  max-width: 34rem;
+}
+
+.hero__subhed {
+  margin: 1rem 3vw 2rem;
+  font-size: clamp(1.12rem, 3vw, 1.8rem);
+  opacity: 0.9;
+  font-family: "PT Serif", serif;
+  font-style: italic;
+  line-height: 1.4;
+  max-width: 90rem;
+  text-align: center;
+}
+
+@media (max-width: 1024px) {
+  .hero__subhed {
+    margin: 1rem 7vw 2rem;
+  }
+}
+
+.hero__byline {
+  margin: 1rem 5vw 0.1rem;
+  font-size: clamp(1.25rem, 3vw, 1.8rem);
+  opacity: 0.9;
+  font-family: "franklin-gothic-urw-cond", sans-serif;
+}
+
+.hero__dateline {
+  margin: 0 5vw 2rem;
+  font-size: clamp(1rem, 2.5vw, 1.2rem);
+  opacity: 0.65;
+  font-family: "franklin-gothic-urw-cond", sans-serif;
+  letter-spacing: 0.05rem;
+}
+
+/* ---------- Hero Intro Dropcap Graf ---------- */
+
+.hero__intro-wrap {
+  text-align: center;
+}
+
+.hero__intro {
+  position: relative;
+  display: inline-block;
+  margin-top: 2.25rem;
+  font-size: 1.2rem;
+  line-height: 1.7;
+  max-width: 42rem;
+  text-align: left;
+}
+
+@media (max-width: 425px) {
+  .hero__intro {
+    padding: 0 1.5rem;
+  }
+}
+
+.hero__intro::first-line {
+  font-family: "franklin-gothic-urw-cond", sans-serif;
+  letter-spacing: 0.045em;
+  color: #bd4f34;
+  text-transform: uppercase;
+  font-weight: bold;
+}
+
+.hero__intro2 {
+  position: relative;
+  display: inline-block;
+  margin-top: 2.25rem;
+  font-size: 1.2rem;
+  line-height: 1.7;
+  max-width: 42rem;
+  text-align: left;
+}
+
+@media (max-width: 425px) {
+  .hero__intro2 {
+    padding: 0 1.5rem;
+  }
+}
+
+.dropcap {
+  font-family: "franklin-gothic-urw-cond", sans-serif;
+  font-size: 4.8rem;
+  line-height: 0.85;
+  font-weight: 600;
+  pointer-events: none;
+  color: #d48a77;
+  float: left;
+  margin-right: 12px;
+}
+
+/* ---------- Intro sections ---------- */
+
+.intro {
+  min-height: 80vh;
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 4rem 1.5rem 5rem;
+}
+
+.intro h2 {
+  font-size: 1.75rem;
+  margin-top: 0;
+  margin-bottom: 1rem;
+  letter-spacing: 0.04em;
+}
+
+/* ---------- Fullscreen map scene with invisible scroll steps ---------- */
+
+.map-scene {
+  position: relative;
+  height: calc((var(--steps) + 1) * 100vh);
+  margin: 7rem 0 4rem 0;
+}
+
+.map-scene__map {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  width: 100vw;
+  margin: 0 auto;
+  z-index: 1;
+}
+
+.map-scene__steps {
+  position: relative;
+  height: calc(var(--steps) * 100vh);
+}
+
+.map-scene__steps>.step {
+  display: block;
+  height: 100vh;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+/* ---------- Map scene fades (top/bottom feathering) ---------- */
+
+.map-scene::before,
+.map-scene::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 24rem;
+  pointer-events: none;
+  z-index: 10;
+}
+
+.map-scene::before {
+  top: 0;
+  background: linear-gradient(to bottom, var(--bg) 0%, rgba(5, 5, 5, 0) 100%);
+}
+
+.map-scene::after {
+  bottom: 0;
+  background: linear-gradient(to top, var(--bg) 0%, rgba(5, 5, 5, 0) 100%);
+}
+
+/* ---------- Overlay host (optional; legends can live anywhere) ---------- */
+
+.map-scene__overlay {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  width: 100%;
+  z-index: 30;
+  pointer-events: none;
+}
+
+/* ---------- Map legend (simple show/hide via jQuery) ---------- */
+
+.map-legend {
+  position: fixed;
+  right: 2rem;
+  bottom: 2rem;
+  width: fit-content;
+  max-width: 680px;
+  background: rgba(5, 5, 5, 0.75);
+  backdrop-filter: blur(6px);
+  color: var(--fg);
+  padding: 1rem 1.25rem;
+  border-radius: 0.5rem;
+  z-index: 40;
+  pointer-events: none;
+  display: none;
+}
+
+@media (max-width: 700px) {
+  .map-legend {
+    left: 1rem;
+    right: 1rem;
+    bottom: 1rem;
+    max-width: none;
+    width: auto;
+  }
+}
+
+.map-legend h2 {
+  margin: 0 0 0.5rem;
+  font-size: 1.2rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.map-legend ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+}
+
+.map-legend li {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 1rem;
+  font-family: "franklin-gothic-urw", sans-serif;
+  line-height: 1.4;
+}
+
+.swatch {
+  width: 1rem;
+  height: 1rem;
+  border-radius: 2px;
+  flex-shrink: 0;
+  opacity: 0.6;
+}
+
+.swatch.country {
+  background: #ffffff;
+  border-radius: 50%;
+}
+
+.swatch.city {
+  background: #ffffff;
+  border-radius: 50%;
+  width: 4rem;
+  height: 4rem;
+}
+
+.swatch.port {
+  background: rgb(0, 115, 103);
+  border-radius: 50%;
+  border: solid 2px rgb(128, 185, 179);
+  width: 1rem;
+  height: 1rem;
+}
+
+.swatch.road {
+  width: 2.25rem;
+  /* length of the lines */
+  height: 0.9rem;
+  /* overall swatch box height */
+  opacity: 1;
+  /* override base swatch opacity */
+  border-radius: 0;
+  /* keep it crisp */
+  background: none;
+  position: relative;
+}
+
+/* the two lines */
+.swatch.road::before,
+.swatch.road::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 2px;
+  /* line thickness */
+  background: #fff;
+  border-radius: 2px;
+  /* tiny rounding looks nice */
+}
+
+/* top line */
+.swatch.road::before {
+  top: 0.18rem;
+}
+
+/* bottom line */
+.swatch.road::after {
+  bottom: 0.18rem;
+}
+
+/* Base clash swatch (shared sizing) */
+.swatch.clash-mid,
+.swatch.clash-light {
+  width: 1.25rem;
+  height: 1.25rem;
+  opacity: 1;
+  /* SVGs already have their own visual weight */
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  border-radius: 0;
+  /* keep SVG edges crisp */
+}
+
+/* Major clashes */
+.swatch.clash-mid {
+  background-image: url("media/green-mid-clash.svg");
+}
+
+/* Minor clashes */
+.swatch.clash-light {
+  background-image: url("media/green-light-clash.svg");
+}
+
+/* Square swatch base */
+.swatch.square {
+  width: 1rem;
+  height: 1rem;
+  border-radius: 2px;
+  /* slight rounding to match other swatches */
+  opacity: 1;
+  /* solid color */
+}
+
+/* Dark teal */
+.swatch.square.dark-teal {
+  background: rgb(0, 115, 103);
+}
+
+/* Light teal */
+.swatch.square.light-teal {
+  background: rgb(140, 192, 187);
+}
+
+
+
+/* ---------- Copy section that follows the map ---------- */
+
+.chapter-copy {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 0 1.5rem 3rem;
+}
+
+/* ---------- Scrollytelling chapter ---------- */
+
+.chapter {
+  position: relative;
+  min-height: 300vh;
+}
+
+.chapter__map {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  width: 80vw;
+}
+
+.chapter__text {
+  position: relative;
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 4rem 1.5rem 6rem;
+}
+
+.chapter .step {
+  min-height: 80vh;
+  padding: 3rem 0;
+  border-left: 2px solid rgba(255, 255, 255, 0.1);
+  padding-left: 1.25rem;
+  opacity: 0.45;
+  transition: opacity 200ms ease-out, border-color 200ms ease-out;
+}
+
+.chapter .step+.step {
+  margin-top: 1.5rem;
+}
+
+.chapter .step.is-active {
+  opacity: 1;
+  border-color: var(--accent);
+}
+
+.chapter .step h3 {
+  margin-top: 0;
+  margin-bottom: 0.75rem;
+  font-size: 1.4rem;
+  letter-spacing: 0.04em;
+}
+
+/* ---------- Hard return wedge ---------- */
+
+.hard-return {
+  margin: 2.25rem auto;
+  width: clamp(90px, 12vw, 140px);
+  opacity: 0.9;
+  line-height: 0;
+}
+
+.hard-return svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.hard-return polygon {
+  fill: #bd4f34;
+}
+
+/* ---------- Breakout media ---------- */
+
+.media-breakout {
+  margin: 7rem 0 0;
+}
+
+.media-breakout figcaption {
+  margin-top: 1.5rem;
+  font-size: 0.95rem;
+  opacity: 0.75;
+  text-align: left;
+  font-family: "franklin-gothic-urw", sans-serif;
+  line-height: 1.4;
+}
+
+/* ---------- Wide media ---------- */
+
+.wide-media {
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(1100px, calc(100vw - 3rem));
+  max-width: 1100px;
+  margin-top: 2.25rem;
+  margin-bottom: 0;
+}
+
+.wide-media img,
+.wide-media video {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.wide-media video,
+.wide-media img {
+  border-radius: 0;
+}
+
+/* ---------- Side-by-side breakout media ---------- */
+
+.wide-media--split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.wide-media--split img {
+  height: clamp(24rem, 60vh, 42rem);
+  object-fit: cover;
+}
+
+.wide-media--split video {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+}
+
+@media (max-width: 700px) {
+  .wide-media--split {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ---------- Footer credits ---------- */
+
+.credits {
+  background: var(--bg);
+  padding: 4rem 0 0;
+}
+
+.credits__inner {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+  text-align: left;
+}
+
+.credits__label {
+  font-size: 0.85rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  opacity: 0.75;
+  margin: 0 0 0.75rem;
+  font-family: "franklin-gothic-urw-cond", sans-serif;
+}
+
+.credits__text {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  opacity: 0.85;
+  margin: 0;
+  font-family: "franklin-gothic-urw", sans-serif;
+}
+
+.credits__text strong {
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  font-family: "franklin-gothic-urw", sans-serif;
+}
+
+.credits__spaced {
+  margin-top: 1.5rem;
+}
+
+.credits__copyright {
+  font-size: 0.95rem;
+  opacity: 0.85;
+  font-family: "franklin-gothic-urw", sans-serif;
+}
