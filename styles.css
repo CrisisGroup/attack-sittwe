@@ -1,7 +1,7 @@
 /* ---------- Global ---------- */
 
 :root {
-  --bg: #050505;
+  --bg: #142326;
   --fg: #f5f5f5;
   --accent: #f15b37;
 }
@@ -73,6 +73,44 @@ a.readmore {
 .hero {
   width: 100%;
   background: var(--bg);
+}
+
+.hero__image-wrap {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 21 / 9; /* keeps your cinematic layout */
+  overflow: hidden;
+}
+
+.hero__image {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100%;
+  height: 100%;
+  transform: translate(-50%, -50%);
+  object-fit: cover;
+}
+
+.hero__image-wrap::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 40%; /* controls fade depth */
+  background: linear-gradient(
+    to bottom,
+    rgba(20, 35, 38, 0) 0%,
+    #142326 100%
+  );
+  pointer-events: none;
+}
+
+@media (max-width: 425px) {
+  .hero__image-wrap {
+    aspect-ratio: 16 / 9;
+  }
 }
 
 .hero__video-wrap {
