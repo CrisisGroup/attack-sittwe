@@ -3,7 +3,7 @@
 :root {
   --bg: #142326;
   --fg: #f5f5f5;
-  --accent: #f15b37;
+  --accent: #BF9788;
 }
 
 *,
@@ -37,7 +37,7 @@ h6 {
 }
 
 h2 {
-  color: #d48a77;
+  color: #BF9788;
   letter-spacing: 0.15rem;
   font-size: 1.3rem;
   margin-top: 3rem;
@@ -45,7 +45,7 @@ h2 {
 
 p {
   line-height: 1.7;
-  font-size: 1.2rem;
+  font-size: 1.3rem;
   text-align: left;
   font-family: pt-serif, serif;
   margin-top: 8px;
@@ -54,6 +54,11 @@ p {
 a {
   color: #d77c65;
   font-weight: bold;
+}
+
+hr {
+  width: 15rem;
+  height: .5px;
 }
 
 a:hover {
@@ -160,7 +165,7 @@ a.readmore {
   font-size: clamp(2.5rem, 8vw, 5rem);
   margin: 0 3vw;
   max-width: 34ch;
-  color: #bd4f34;
+  color: #BF9788;
   text-transform: none !important;
 }
 
@@ -171,12 +176,12 @@ a.readmore {
 
 .hero__subhed {
   margin: 1rem 3vw 2rem;
-  font-size: clamp(1.12rem, 3vw, 1.8rem);
+  font-size: clamp(1.12rem, 3vw, 1.5rem);
   opacity: 0.9;
   font-family: "PT Serif", serif;
   font-style: italic;
   line-height: 1.4;
-  max-width: 90rem;
+  max-width: 45rem;
   text-align: center;
 }
 
@@ -211,7 +216,7 @@ a.readmore {
   position: relative;
   display: inline-block;
   margin-top: 2.25rem;
-  font-size: 1.2rem;
+  font-size: 1.3rem;
   line-height: 1.7;
   max-width: 42rem;
   text-align: left;
@@ -222,14 +227,14 @@ a.readmore {
     padding: 0 1.5rem;
   }
 }
-
+/* 
 .hero__intro::first-line {
   font-family: "franklin-gothic-urw-cond", sans-serif;
   letter-spacing: 0.045em;
   color: #bd4f34;
   text-transform: uppercase;
   font-weight: bold;
-}
+} */
 
 .hero__intro2 {
   position: relative;
@@ -510,6 +515,13 @@ a.readmore {
   padding: 0 1.5rem 3rem;
 }
 
+.chapter-copy--scroll-swap {
+  position: relative;
+  max-width: none;
+  padding: 0;
+  min-height: 0;
+}
+
 /* ---------- Scrollytelling chapter ---------- */
 
 .chapter {
@@ -581,6 +593,11 @@ a.readmore {
   margin: 7rem 0 0;
 }
 
+.media-breakout--scroll-swap {
+  width: 100%;
+  margin: 0;
+}
+
 .media-breakout figcaption {
   margin-top: 1.5rem;
   font-size: 0.95rem;
@@ -614,6 +631,80 @@ a.readmore {
   border-radius: 0;
 }
 
+.wide-media--scroll-swap {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  margin-top: 0;
+}
+
+.scroll-swap__stage {
+  position: sticky;
+  top: 0;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem 1.5rem;
+  background: var(--bg);
+  z-index: 1;
+}
+
+.scroll-swap__track {
+  height: 110vh;
+}
+
+.scroll-swap__image {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.scroll-swap__image--base,
+.scroll-swap__image--overlay {
+  transition: opacity 600ms ease, transform 600ms ease;
+  will-change: opacity, transform;
+}
+
+[data-scroll-swap][data-swap-state="0"] .scroll-swap__image--base {
+  opacity: 1;
+  transform: scale(1);
+}
+
+[data-scroll-swap][data-swap-state="0"] .scroll-swap__image--overlay {
+  opacity: 0;
+  transform: scale(0.985);
+}
+
+[data-scroll-swap][data-swap-state="1"] .scroll-swap__image--base {
+  opacity: 0;
+  transform: scale(1.015);
+}
+
+[data-scroll-swap][data-swap-state="1"] .scroll-swap__image--overlay {
+  opacity: 1;
+  transform: scale(1);
+}
+
+@media (max-width: 700px) {
+  .scroll-swap__stage {
+    padding: 2rem 1rem;
+  }
+
+  .scroll-swap__track {
+    height: 100vh;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .scroll-swap__image--base,
+  .scroll-swap__image--overlay {
+    transition: none;
+  }
+}
+
 /* ---------- Side-by-side breakout media ---------- */
 
 .wide-media--split {
@@ -627,6 +718,24 @@ a.readmore {
   object-fit: cover;
 }
 
+.wide-media--three-up {
+  display: grid;
+  gap: 1rem;
+}
+
+.wide-media__top-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.wide-media__top-row img,
+.wide-media__bottom-full {
+  width: 100%;
+  height: clamp(24rem, 60vh, 42rem);
+  object-fit: cover;
+}
+
 .wide-media--split video {
   width: 100%;
   height: auto;
@@ -636,6 +745,10 @@ a.readmore {
 
 @media (max-width: 700px) {
   .wide-media--split {
+    grid-template-columns: 1fr;
+  }
+
+  .wide-media__top-row {
     grid-template-columns: 1fr;
   }
 }
@@ -668,13 +781,13 @@ a.readmore {
   line-height: 1.6;
   opacity: 0.85;
   margin: 0;
-  font-family: "franklin-gothic-urw", sans-serif;
+  font-family: "franklin-gothic-urw-cond", sans-serif;
 }
 
 .credits__text strong {
   font-weight: 600;
   letter-spacing: 0.02em;
-  font-family: "franklin-gothic-urw", sans-serif;
+  font-family: "franklin-gothic-urw-cond", sans-serif;
 }
 
 .credits__spaced {
@@ -684,5 +797,5 @@ a.readmore {
 .credits__copyright {
   font-size: 0.95rem;
   opacity: 0.85;
-  font-family: "franklin-gothic-urw", sans-serif;
+  font-family: "franklin-gothic-urw-cond", sans-serif;
 }

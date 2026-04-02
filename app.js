@@ -363,3 +363,39 @@ function initScene(sceneId) {
 
 Object.keys(scenes).forEach(initScene);
 
+function initScrollSwaps() {
+  const swaps = Array.from(document.querySelectorAll("[data-scroll-swap]"));
+  if (!swaps.length) return;
+
+  let ticking = false;
+
+  swaps.forEach((swap) => {
+    if (!swap.dataset.swapState) {
+      swap.dataset.swapState = "0";
+    }
+  });
+
+  function updateSwaps() {
+    swaps.forEach((swap) => {
+      const rect = swap.getBoundingClientRect();
+      const totalScroll = Math.max(swap.offsetHeight - window.innerHeight, 1);
+      const distance = clamp(-rect.top, 0, totalScroll);
+      const progress = distance / totalScroll;
+      swap.dataset.swapState = progress >= 0.5 ? "1" : "0";
+    });
+
+    ticking = false;
+  }
+
+  function requestUpdate() {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(updateSwaps);
+  }
+
+  requestUpdate();
+  window.addEventListener("scroll", requestUpdate, { passive: true });
+  window.addEventListener("resize", requestUpdate);
+}
+
+initScrollSwaps();
