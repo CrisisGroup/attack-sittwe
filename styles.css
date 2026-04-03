@@ -193,14 +193,18 @@ a.readmore {
 
 .hero__byline {
   margin: 1rem 5vw 0.1rem;
-  font-size: clamp(1.25rem, 3vw, 1.8rem);
+  font-size: clamp(1.25rem, 3vw, 1.4rem);
   opacity: 0.9;
   font-family: "franklin-gothic-urw-cond", sans-serif;
 }
 
+.hero__byline strong {
+  letter-spacing: 0.09rem;
+}
+
 .hero__dateline {
   margin: 0 5vw 2rem;
-  font-size: clamp(1rem, 2.5vw, 1.2rem);
+  font-size: clamp(1.25rem, 3vw, 1.4rem);
   opacity: 0.65;
   font-family: "franklin-gothic-urw-cond", sans-serif;
   letter-spacing: 0.05rem;
@@ -589,8 +593,12 @@ a.readmore {
 
 /* ---------- Breakout media ---------- */
 
+.media-breakout-maps {
+  margin: 3rem 0 3rem 0;
+}
+
 .media-breakout {
-  margin: 7rem 0 0;
+  margin: 3rem 0 0;
 }
 
 .media-breakout--scroll-swap {
@@ -599,7 +607,7 @@ a.readmore {
 }
 
 .media-breakout figcaption {
-  margin-top: 1.5rem;
+  margin: 1.5rem 0 3rem 0;
   font-size: 0.95rem;
   opacity: 0.75;
   text-align: left;
@@ -660,32 +668,44 @@ a.readmore {
   width: 100%;
   height: 100%;
   object-fit: contain;
+  transition: opacity 220ms ease;
+  will-change: opacity;
 }
 
-.scroll-swap__image--base,
-.scroll-swap__image--overlay {
-  transition: opacity 600ms ease, transform 600ms ease;
-  will-change: opacity, transform;
-}
-
-[data-scroll-swap][data-swap-state="0"] .scroll-swap__image--base {
-  opacity: 1;
-  transform: scale(1);
-}
-
-[data-scroll-swap][data-swap-state="0"] .scroll-swap__image--overlay {
+.scroll-swap__image.is-swapping {
   opacity: 0;
-  transform: scale(0.985);
 }
 
-[data-scroll-swap][data-swap-state="1"] .scroll-swap__image--base {
-  opacity: 0;
-  transform: scale(1.015);
+.scroll-swap__debug {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  z-index: 2;
 }
 
-[data-scroll-swap][data-swap-state="1"] .scroll-swap__image--overlay {
-  opacity: 1;
-  transform: scale(1);
+.scroll-swap__debug-state {
+  display: none;
+  padding: 0.55rem 0.8rem;
+  border: 1px solid rgba(245, 245, 245, 0.35);
+  background: rgba(20, 35, 38, 0.82);
+  color: var(--fg);
+  font-family: "franklin-gothic-urw-cond", sans-serif;
+  font-size: 0.8rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+[data-scroll-swap][data-swap-state="before"] .scroll-swap__debug-state--before,
+[data-scroll-swap][data-swap-state="after"] .scroll-swap__debug-state--after {
+  display: inline-block;
+}
+
+[data-scroll-swap][data-swap-state="before"] .wide-media--scroll-swap {
+  outline: 3px solid rgba(189, 79, 52, 0.9);
+}
+
+[data-scroll-swap][data-swap-state="after"] .wide-media--scroll-swap {
+  outline: 3px solid rgba(174, 206, 181, 0.95);
 }
 
 @media (max-width: 700px) {
@@ -699,8 +719,7 @@ a.readmore {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .scroll-swap__image--base,
-  .scroll-swap__image--overlay {
+  .scroll-swap__image {
     transition: none;
   }
 }
@@ -757,14 +776,16 @@ a.readmore {
 
 .credits {
   background: var(--bg);
-  padding: 4rem 0 0;
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 0 1.5rem 3rem;
 }
 
 .credits__inner {
+  text-align: left;
   max-width: 720px;
   margin: 0 auto;
-  padding: 0 1.5rem;
-  text-align: left;
+  padding: 0 1.5rem 3rem;
 }
 
 .credits__label {
@@ -777,6 +798,7 @@ a.readmore {
 }
 
 .credits__text {
+  letter-spacing: 0.02rem;
   font-size: 0.95rem;
   line-height: 1.6;
   opacity: 0.85;
@@ -785,7 +807,13 @@ a.readmore {
 }
 
 .credits__text strong {
-  font-weight: 600;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  font-family: "franklin-gothic-urw-cond", sans-serif;
+}
+
+.credits__text__author strong {
+  font-weight: 700;
   letter-spacing: 0.02em;
   font-family: "franklin-gothic-urw-cond", sans-serif;
 }
@@ -797,5 +825,6 @@ a.readmore {
 .credits__copyright {
   font-size: 0.95rem;
   opacity: 0.85;
+  margin-top: 1.5rem;
   font-family: "franklin-gothic-urw-cond", sans-serif;
 }

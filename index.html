@@ -63,7 +63,7 @@
     <link rel="stylesheet" href="https://use.typekit.net/amu4upa.css">
 
     <!-- Your external stylesheet -->
-    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="styles.css?v=20260403b" />
 
     <!-- jQuery (needed for your legend toggles) -->
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"
@@ -101,7 +101,7 @@
             <hr />
 
             <p class="hero__byline">
-                by the <strong>INTERNATIONAL CRISIS GROUP</strong>
+                <span style="opacity: 0.65;">by the</span> <strong>INTERNATIONAL CRISIS GROUP</strong>
             </p>
 
             <p class="hero__dateline">
@@ -120,10 +120,9 @@
     <main>
 
         <section class="chapter-copy">
-            <figure class="media-breakout">
+            <figure class="media-breakout-maps">
                     <img src="media/sittwe_1.svg"
                         alt="The Mrauk-U hospital building was damaged by regime airstrikes." />
-                <figcaption>Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque expedita enim inventore rem aliquid aut reprehenderit necessitatibus. Hic minus, vel earum doloribus distinctio obcaecati incidunt enim aliquam fugit impedit. Non?</figcaption>
             </figure>
             <p>Since the start of the year, the Arakan Army has picked up the pace of its attacks, including around Sittwe. The group has consistently said it intends to seize control of the rest of Rakhine; during unsuccessful China-brokered ceasefire talks in May 2024, it demanded the military quit the state in exchange for a deal. But capturing Sittwe will be a tougher challenge than anything the Arakan Army has accomplished thus far. The town is home to an estimated 250,000 people, both Rakhine and Rohingya, spread across the urban area, surrounding villages and Rohingya displacement camps. The capital is essentially an island, bounded on the three sides by major water bodies; the only road access is via a bridge over Min Chaung, a creek that marks the border between military and Arakan Army control.</p>
 
@@ -133,16 +132,19 @@
 
         </section>
 
-        <section class="chapter-copy chapter-copy--scroll-swap" data-scroll-swap data-swap-state="0">
+        <section class="chapter-copy chapter-copy--scroll-swap" data-scroll-swap data-swap-state="before">
             <div class="scroll-swap__stage">
                 <figure class="media-breakout media-breakout--scroll-swap">
                     <div class="wide-media wide-media--scroll-swap">
-                        <img class="scroll-swap__image scroll-swap__image--base" src="media/sittwe_1.svg"
-                            alt="Two-state graphic showing the military's forced displacement campaign around Sittwe." />
-                        <img class="scroll-swap__image scroll-swap__image--overlay" src="media/sittwe_2.svg"
-                            alt="" aria-hidden="true" />
+                        <img class="scroll-swap__image" src="media/sittwe_1.svg?v=20260403d"
+                            data-before-src="media/sittwe_1.svg?v=20260403d"
+                            data-after-src="media/sittwe_2.svg?v=20260403d"
+                            alt="Graphic showing the military's forced displacement campaign around Sittwe." />
+                        <div class="scroll-swap__debug" aria-hidden="true">
+                            <span class="scroll-swap__debug-state scroll-swap__debug-state--before">Before</span>
+                            <span class="scroll-swap__debug-state scroll-swap__debug-state--after">After</span>
+                        </div>
                     </div>
-                    <figcaption>Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque expedita enim inventore rem aliquid aut reprehenderit necessitatibus. Hic minus, vel earum doloribus distinctio obcaecati incidunt enim aliquam fugit impedit. Non?</figcaption>
                 </figure>
             </div>
             <div class="scroll-swap__track" aria-hidden="true"></div>
@@ -194,14 +196,12 @@
                 Close to what is now the front line with the Arakan Army, the military has also built several large military bases, linked by new roads and protected by several rows of fortifications. To man these new outposts the regime has been sending in batches of reinforcements by boat –many of them conscripts drafted into the military since February 2024, when it activated a longstanding military service law to replenish its ranks.
             </p>
 
-            <section class="chapter-copy chapter-copy--scroll-swap" data-scroll-swap data-swap-state="0">
+            <section class="chapter-copy chapter-copy--scroll-swap">
             <div class="scroll-swap__stage">
                 <figure class="media-breakout media-breakout--scroll-swap">
                     <div class="wide-media wide-media--scroll-swap">
-                        <img class="scroll-swap__image scroll-swap__image--base" src="media/sittwe_1.svg"
-                            alt="Two-state graphic showing the military's forced displacement campaign around Sittwe." />
-                        <img class="scroll-swap__image scroll-swap__image--overlay" src="media/sittwe_2.svg"
-                            alt="" aria-hidden="true" />
+                        <img class="scroll-swap__image" src="media/sittwe_1.svg"
+                            alt="Graphic showing the military's forced displacement campaign around Sittwe." />
                     </div>
                     <figcaption>Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque expedita enim inventore rem aliquid aut reprehenderit necessitatibus. Hic minus, vel earum doloribus distinctio obcaecati incidunt enim aliquam fugit impedit. Non?</figcaption>
                 </figure>
@@ -244,16 +244,16 @@
 
     <footer class="credits">
         <div class="credits__inner">
-            <p class="credits__label">Sources</p>
+            <p class="credits__label"><strong>Sources</strong></p>
             <p class="credits__text">
-                MAPS: Crisis Group research; OpenStreetMap; <br />
-                SATELLITE IMAGERY: Google Earth and Planet Labs PBC
+                <strong>MAPS</strong>: Crisis Group research; OpenStreetMap; <br />
+                <strong>SATELLITE IMAGERY</strong>: Google Earth and Planet Labs PBC
             </p>
 
             <p class="credits__text credits__spaced">
-                Research and analysis by <strong>Tom Kean</strong><br />
-                Visualisations by <strong>Claire Boccon-Gibod</strong> and <strong>Paul Franz</strong>
-            </p><br />
+                Research and analysis by <strong class="credits__text__author">Tom Kean</strong><br />
+                Visualisations by <strong class="credits__text__author">Claire Boccon-Gibod</strong> and <strong>Paul Franz</strong>
+            </p>
 
             <p class="credits__copyright">
                 All rights <a href="https://www.crisisgroup.org/legal/privacy-policy" target="_blank">International
@@ -265,7 +265,8 @@
 
     <!-- Mapbox JS + your app logic -->
     <script src="https://api.mapbox.com/mapbox-gl-js/v3.8.0/mapbox-gl.js"></script>
-    <script src="app.js" type="module"></script>
+    <script src="app.js?v=20260403b" type="module"></script>
+    <script src="scroll-swap.js?v=20260403c"></script>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"
         integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous">
         </script>
