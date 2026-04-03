@@ -789,7 +789,7 @@ a.readmore {
 }
 
 .credits__label {
-  font-size: 0.85rem;
+  font-size: 0.95rem;
   letter-spacing: 0.14em;
   text-transform: uppercase;
   opacity: 0.75;
@@ -799,7 +799,7 @@ a.readmore {
 
 .credits__text {
   letter-spacing: 0.02rem;
-  font-size: 0.95rem;
+  font-size: 1.2rem;
   line-height: 1.6;
   opacity: 0.85;
   margin: 0;
@@ -823,7 +823,7 @@ a.readmore {
 }
 
 .credits__copyright {
-  font-size: 0.95rem;
+  font-size: 1.2rem;
   opacity: 0.85;
   margin-top: 1.5rem;
   font-family: "franklin-gothic-urw-cond", sans-serif;
