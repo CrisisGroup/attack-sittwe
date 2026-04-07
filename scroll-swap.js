@@ -20,11 +20,42 @@
     preloadCache.add(src);
   }
 
-  function applySwapImage(swap, nextState) {
+  function getSwapSources(image) {
+    const sources = image.dataset.swapSrcs
+      ? image.dataset.swapSrcs.split(",").map((src) => src.trim()).filter(Boolean)
+      : [];
+
+    if (sources.length) return sources;
+
+    return [image.dataset.beforeSrc, image.dataset.afterSrc].filter(Boolean);
+  }
+
+  function getInitialSwapIndex(swap, sources) {
+    const requestedIndex = Number.parseInt(swap.dataset.swapIndex, 10);
+
+    if (Number.isInteger(requestedIndex)) {
+      return Math.min(Math.max(requestedIndex, 0), sources.length - 1);
+    }
+
+    if (swap.dataset.swapState === "after") {
+      return Math.min(1, sources.length - 1);
+    }
+
+    return 0;
+  }
+
+  function applySwapImage(swap, nextIndex) {
     const image = getSwapImage(swap);
     if (!image) return;
 
-    const nextSrc = nextState === "after" ? image.dataset.afterSrc : image.dataset.beforeSrc;
+    const sources = getSwapSources(image);
+    if (!sources.length) return;
+
+    const clampedIndex = Math.min(Math.max(nextIndex, 0), sources.length - 1);
+    const nextSrc = sources[clampedIndex];
+    swap.dataset.swapIndex = String(clampedIndex);
+    swap.dataset.swapState = clampedIndex === 0 ? "before" : "after";
+
     if (!nextSrc || image.getAttribute("src") === nextSrc) return;
 
     if (prefersReducedMotion.matches) {
@@ -57,16 +88,12 @@
   }
 
   swaps.forEach((swap) => {
-    if (!swap.dataset.swapState) {
-      swap.dataset.swapState = "before";
-    }
-
     const image = getSwapImage(swap);
     if (!image) return;
 
-    preloadSource(image.dataset.beforeSrc);
-    preloadSource(image.dataset.afterSrc);
-    applySwapImage(swap, swap.dataset.swapState);
+    const sources = getSwapSources(image);
+    sources.forEach(preloadSource);
+    applySwapImage(swap, getInitialSwapIndex(swap, sources));
   });
 
   let ticking = false;
@@ -78,11 +105,20 @@
       const track = getSwapTrack(swap);
       if (!track) return;
 
-      const nextState = track.getBoundingClientRect().top <= triggerLine ? "after" : "before";
+      const image = getSwapImage(swap);
+      if (!image) return;
 
-      if ((swap.dataset.swapState || "before") !== nextState) {
-        swap.dataset.swapState = nextState;
-        applySwapImage(swap, nextState);
+      const sources = getSwapSources(image);
+      if (!sources.length) return;
+
+      const trackRect = track.getBoundingClientRect();
+      const trackProgress = Math.min(Math.max((triggerLine - trackRect.top) / trackRect.height, 0), 0.999);
+      const nextIndex = trackRect.top <= triggerLine
+        ? Math.min(Math.floor(trackProgress * (sources.length - 1)) + 1, sources.length - 1)
+        : 0;
+
+      if (Number.parseInt(swap.dataset.swapIndex, 10) !== nextIndex) {
+        applySwapImage(swap, nextIndex);
       }
     });
 
