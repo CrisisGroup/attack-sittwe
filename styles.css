@@ -614,6 +614,12 @@ a:hover {
   margin: 3rem 0 0;
 }
 
+.media-breakout--column img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
 .media-breakout--scroll-swap {
   width: 100%;
   margin: 0;
@@ -638,6 +644,11 @@ a:hover {
   max-width: 1100px;
   margin-top: 2.25rem;
   margin-bottom: 0;
+}
+
+.wide-media--urban-breakout {
+  width: min(1280px, calc(100vw - 1.5rem));
+  max-width: 1280px;
 }
 
 .wide-media img,
