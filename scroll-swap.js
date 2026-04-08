@@ -2,11 +2,16 @@
   const swaps = Array.from(document.querySelectorAll("[data-scroll-swap]"));
   if (!swaps.length) return;
 
+  const FADE_DURATION_MS = 360;
   const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
   const preloadCache = new Set();
 
   function getSwapImage(swap) {
-    return swap.querySelector(".scroll-swap__image");
+    return swap.querySelector(".scroll-swap__image--active");
+  }
+
+  function getBufferImage(swap) {
+    return swap.querySelector(".scroll-swap__image--buffer");
   }
 
   function getSwapTrack(swap) {
@@ -45,10 +50,11 @@
   }
 
   function applySwapImage(swap, nextIndex) {
-    const image = getSwapImage(swap);
-    if (!image) return;
+    const activeImage = getSwapImage(swap);
+    const bufferImage = getBufferImage(swap);
+    if (!activeImage || !bufferImage) return;
 
-    const sources = getSwapSources(image);
+    const sources = getSwapSources(activeImage);
     if (!sources.length) return;
 
     const clampedIndex = Math.min(Math.max(nextIndex, 0), sources.length - 1);
@@ -56,33 +62,55 @@
     swap.dataset.swapIndex = String(clampedIndex);
     swap.dataset.swapState = clampedIndex === 0 ? "before" : "after";
 
-    if (!nextSrc || image.getAttribute("src") === nextSrc) return;
+    if (!nextSrc || activeImage.getAttribute("src") === nextSrc) return;
 
     if (prefersReducedMotion.matches) {
-      image.setAttribute("src", nextSrc);
+      window.clearTimeout(swap.__swapCleanupTimer);
+      swap.__swapCleanupTimer = undefined;
+      activeImage.setAttribute("src", nextSrc);
+      bufferImage.setAttribute("src", nextSrc);
+      bufferImage.classList.remove("is-visible");
       return;
     }
 
-    let settled = false;
+    window.clearTimeout(swap.__swapCleanupTimer);
+    swap.__swapCleanupTimer = undefined;
+    swap.__swapToken = (swap.__swapToken || 0) + 1;
+    const swapToken = swap.__swapToken;
 
-    function finishSwap() {
-      if (settled) return;
-      settled = true;
-      image.classList.remove("is-swapping");
-      image.removeEventListener("load", handleLoad);
-      image.removeEventListener("error", handleLoad);
+    function cleanup() {
+      if (swap.__swapToken !== swapToken) return;
+      bufferImage.classList.remove("is-visible");
+      if (swap.__bufferLoadHandler === handleLoad) {
+        bufferImage.removeEventListener("load", handleLoad);
+        bufferImage.removeEventListener("error", handleLoad);
+        swap.__bufferLoadHandler = undefined;
+      }
+      activeImage.setAttribute("src", nextSrc);
+      bufferImage.setAttribute("src", nextSrc);
+      swap.__swapCleanupTimer = undefined;
     }
 
     function handleLoad() {
-      requestAnimationFrame(finishSwap);
+      if (swap.__swapToken !== swapToken) return;
+      requestAnimationFrame(() => {
+        if (swap.__swapToken !== swapToken) return;
+        bufferImage.classList.add("is-visible");
+      });
+      swap.__swapCleanupTimer = window.setTimeout(cleanup, FADE_DURATION_MS);
     }
 
-    image.classList.add("is-swapping");
-    image.addEventListener("load", handleLoad, { once: true });
-    image.addEventListener("error", handleLoad, { once: true });
-    image.setAttribute("src", nextSrc);
+    bufferImage.classList.remove("is-visible");
+    if (swap.__bufferLoadHandler) {
+      bufferImage.removeEventListener("load", swap.__bufferLoadHandler);
+      bufferImage.removeEventListener("error", swap.__bufferLoadHandler);
+    }
+    swap.__bufferLoadHandler = handleLoad;
+    bufferImage.addEventListener("load", handleLoad, { once: true });
+    bufferImage.addEventListener("error", handleLoad, { once: true });
+    bufferImage.setAttribute("src", nextSrc);
 
-    if (image.complete) {
+    if (bufferImage.complete) {
       handleLoad();
     }
   }

@@ -66,7 +66,7 @@
     <link rel="stylesheet" href="https://use.typekit.net/amu4upa.css">
 
     <!-- Your external stylesheet -->
-    <link rel="stylesheet" href="styles.css?v=20260408i" />
+    <link rel="stylesheet" href="styles.css?v=20260408k" />
 
     <!-- jQuery (needed for your legend toggles) -->
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"
@@ -236,10 +236,12 @@
             <div class="scroll-swap__stage">
                 <figure class="media-breakout media-breakout--scroll-swap">
                     <div class="wide-media wide-media--scroll-swap wide-media--scroll-swap-abandoned">
-                        <img class="scroll-swap__image" src="media/3a_abandoned.svg?v=20260403d"
+                        <img class="scroll-swap__image scroll-swap__image--active" src="media/3a_abandoned.svg?v=20260403d"
                             data-before-src="media/3a_abandoned.svg?v=20260403d"
                             data-after-src="media/3b_abandoned.svg?v=20260403d"
                             alt="Graphic showing the military's forced displacement campaign around Sittwe." />
+                        <img class="scroll-swap__image scroll-swap__image--buffer" src="media/3a_abandoned.svg?v=20260403d"
+                            alt="" aria-hidden="true" />
                     </div>
                 </figure>
             </div>
@@ -341,9 +343,11 @@
             <div class="scroll-swap__stage">
                 <figure class="media-breakout media-breakout--scroll-swap">
                     <div class="wide-media wide-media--scroll-swap wide-media--scroll-swap-fort">
-                        <img class="scroll-swap__image" src="media/6a_fort.svg?v=20260407a"
+                        <img class="scroll-swap__image scroll-swap__image--active" src="media/6a_fort.svg?v=20260407a"
                             data-swap-srcs="media/6a_fort.svg?v=20260407a,media/6b_fort.svg?v=20260407a,media/6c_fort.svg?v=20260407a"
                             alt="Graphic showing the military fortifications around Sittwe." />
+                        <img class="scroll-swap__image scroll-swap__image--buffer" src="media/6a_fort.svg?v=20260407a"
+                            alt="" aria-hidden="true" />
                     </div>
                 </figure>
             </div>
@@ -445,8 +449,8 @@
         <div class="credits__inner">
             <p class="credits__label"><strong>Sources</strong></p>
             <p class="credits__text">
-                <strong style="color: #BF9788;">MAPS</strong>: Crisis Group research; OpenStreetMap. <br />
-                <strong style="color: #BF9788;">SATELLITE IMAGERY</strong>: © Google Earth / Airbus | VIIRS Nighttime Lights (Earth Observation Group, Colorado School of Mines).
+                <strong style="color: #BF9788;">MAPS</strong>: Crisis Group research; OpenStreetMap; Natural Earth. <br />
+                <strong style="color: #BF9788;">SATELLITE IMAGERY</strong>: © Google Earth / Airbus; VIIRS Nighttime Lights (Earth Observation Group, Colorado School of Mines).
             </p>
 
             <p class="credits__text credits__spaced">
@@ -465,7 +469,7 @@
 
     <!-- Mapbox JS + your app logic -->
     <script src="app.js?v=20260403b" type="module"></script>
-    <script src="scroll-swap.js?v=20260407a"></script>
+    <script src="scroll-swap.js?v=20260408a"></script>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"
         integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous">
         </script>
