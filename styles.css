@@ -734,7 +734,9 @@ a:hover {
 }
 
 .wide-media--split img {
-  height: clamp(24rem, 60vh, 42rem);
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  height: auto;
   object-fit: cover;
 }
 
@@ -749,7 +751,13 @@ a:hover {
   gap: 1rem;
 }
 
-.wide-media__top-row img,
+.wide-media__top-row img {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  height: auto;
+  object-fit: cover;
+}
+
 .wide-media__bottom-full {
   width: 100%;
   height: clamp(24rem, 60vh, 42rem);
