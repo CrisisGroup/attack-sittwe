@@ -4,6 +4,12 @@
   --bg: #142326;
   --fg: #f5f5f5;
   --accent: #BF9788;
+  --chapter-copy-space-bottom: 3rem;
+  --chapter-copy-space-inline: 1.5rem;
+  --media-block-space-top: 3rem;
+  --media-block-space-bottom: 3rem;
+  --media-block-space-inline: 1.5rem;
+  --media-block-caption-gap: 1.5rem;
 }
 
 *,
@@ -61,7 +67,7 @@ a {
 }
 
 hr {
-  width: 15rem;
+  width: 12rem;
   height: .5px;
 }
 
@@ -291,256 +297,16 @@ figure {
   margin-right: 12px;
 }
 
-/* ---------- Intro sections ---------- */
-
-.intro {
-  min-height: 80vh;
-  max-width: 720px;
-  margin: 0 auto;
-  padding: 4rem 1.5rem 5rem;
-}
-
-.intro h2 {
-  font-size: 1.75rem;
-  margin-top: 0;
-  margin-bottom: 1rem;
-  letter-spacing: 0.04em;
-}
-
-/* ---------- Fullscreen map scene with invisible scroll steps ---------- */
-
-.map-scene {
-  position: relative;
-  height: calc((var(--steps) + 1) * 100vh);
-  margin: 7rem 0 4rem 0;
-}
-
-.map-scene__map {
-  position: sticky;
-  top: 0;
-  height: 100vh;
-  width: 100vw;
-  margin: 0 auto;
-  z-index: 1;
-}
-
-.map-scene__steps {
-  position: relative;
-  height: calc(var(--steps) * 100vh);
-}
-
-.map-scene__steps>.step {
-  display: block;
-  height: 100vh;
-  width: 100%;
-  margin: 0;
-  padding: 0;
-}
-
-/* ---------- Map scene fades (top/bottom feathering) ---------- */
-
-.map-scene::before,
-.map-scene::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  right: 0;
-  height: 24rem;
-  pointer-events: none;
-  z-index: 10;
-}
-
-.map-scene::before {
-  top: 0;
-  background: linear-gradient(to bottom, var(--bg) 0%, rgba(5, 5, 5, 0) 100%);
-}
-
-.map-scene::after {
-  bottom: 0;
-  background: linear-gradient(to top, var(--bg) 0%, rgba(5, 5, 5, 0) 100%);
-}
-
-/* ---------- Overlay host (optional; legends can live anywhere) ---------- */
-
-.map-scene__overlay {
-  position: sticky;
-  top: 0;
-  height: 100vh;
-  width: 100%;
-  z-index: 30;
-  pointer-events: none;
-}
-
-/* ---------- Map legend (simple show/hide via jQuery) ---------- */
-
-.map-legend {
-  position: fixed;
-  right: 2rem;
-  bottom: 2rem;
-  width: fit-content;
-  max-width: 680px;
-  background: rgba(5, 5, 5, 0.75);
-  backdrop-filter: blur(6px);
-  color: var(--fg);
-  padding: 1rem 1.25rem;
-  border-radius: 0.5rem;
-  z-index: 40;
-  pointer-events: none;
-  display: none;
-}
-
-@media (max-width: 700px) {
-  .map-legend {
-    left: 1rem;
-    right: 1rem;
-    bottom: 1rem;
-    max-width: none;
-    width: auto;
-  }
-}
-
-.map-legend h2 {
-  margin: 0 0 0.5rem;
-  font-size: 1.2rem;
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
-}
-
-.map-legend ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  display: flex;
-  align-items: center;
-  gap: 1.25rem;
-}
-
-.map-legend li {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  font-size: 1rem;
-  font-family: "franklin-gothic-urw", sans-serif;
-  line-height: 1.4;
-}
-
-.swatch {
-  width: 1rem;
-  height: 1rem;
-  border-radius: 2px;
-  flex-shrink: 0;
-  opacity: 0.6;
-}
-
-.swatch.country {
-  background: #ffffff;
-  border-radius: 50%;
-}
-
-.swatch.city {
-  background: #ffffff;
-  border-radius: 50%;
-  width: 4rem;
-  height: 4rem;
-}
-
-.swatch.port {
-  background: rgb(0, 115, 103);
-  border-radius: 50%;
-  border: solid 2px rgb(128, 185, 179);
-  width: 1rem;
-  height: 1rem;
-}
-
-.swatch.road {
-  width: 2.25rem;
-  /* length of the lines */
-  height: 0.9rem;
-  /* overall swatch box height */
-  opacity: 1;
-  /* override base swatch opacity */
-  border-radius: 0;
-  /* keep it crisp */
-  background: none;
-  position: relative;
-}
-
-/* the two lines */
-.swatch.road::before,
-.swatch.road::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  right: 0;
-  height: 2px;
-  /* line thickness */
-  background: #fff;
-  border-radius: 2px;
-  /* tiny rounding looks nice */
-}
-
-/* top line */
-.swatch.road::before {
-  top: 0.18rem;
-}
-
-/* bottom line */
-.swatch.road::after {
-  bottom: 0.18rem;
-}
-
-/* Base clash swatch (shared sizing) */
-.swatch.clash-mid,
-.swatch.clash-light {
-  width: 1.25rem;
-  height: 1.25rem;
-  opacity: 1;
-  /* SVGs already have their own visual weight */
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: contain;
-  border-radius: 0;
-  /* keep SVG edges crisp */
-}
-
-/* Major clashes */
-.swatch.clash-mid {
-  background-image: url("media/green-mid-clash.svg");
-}
-
-/* Minor clashes */
-.swatch.clash-light {
-  background-image: url("media/green-light-clash.svg");
-}
-
-/* Square swatch base */
-.swatch.square {
-  width: 1rem;
-  height: 1rem;
-  border-radius: 2px;
-  /* slight rounding to match other swatches */
-  opacity: 1;
-  /* solid color */
-}
-
-/* Dark teal */
-.swatch.square.dark-teal {
-  background: rgb(0, 115, 103);
-}
-
-/* Light teal */
-.swatch.square.light-teal {
-  background: rgb(140, 192, 187);
-}
-
-
-
 /* ---------- Copy section that follows the map ---------- */
 
 .chapter-copy {
   max-width: 720px;
   margin: 0 auto;
-  padding: 0 1.5rem 3rem;
+  padding: 0 var(--chapter-copy-space-inline) var(--chapter-copy-space-bottom);
+}
+
+.chapter-copy > :last-child {
+  margin-bottom: 0;
 }
 
 .chapter-copy--scroll-swap {
@@ -550,75 +316,25 @@ figure {
   min-height: 0;
 }
 
-/* ---------- Scrollytelling chapter ---------- */
-
-.chapter {
-  position: relative;
-  min-height: 300vh;
+.chapter-copy:not(.chapter-copy--scroll-swap)+.chapter-copy>.media-breakout.media-block:first-child {
+  margin-top: calc(var(--media-block-top) - var(--chapter-copy-space-bottom));
 }
 
-.chapter__map {
-  position: sticky;
-  top: 0;
-  height: 100vh;
-  width: 80vw;
-}
-
-.chapter__text {
-  position: relative;
-  max-width: 720px;
-  margin: 0 auto;
-  padding: 4rem 1.5rem 6rem;
-}
-
-.chapter .step {
-  min-height: 80vh;
-  padding: 3rem 0;
-  border-left: 2px solid rgba(255, 255, 255, 0.1);
-  padding-left: 1.25rem;
-  opacity: 0.45;
-  transition: opacity 200ms ease-out, border-color 200ms ease-out;
-}
-
-.chapter .step+.step {
-  margin-top: 1.5rem;
-}
-
-.chapter .step.is-active {
-  opacity: 1;
-  border-color: var(--accent);
-}
-
-.chapter .step h3 {
-  margin-top: 0;
-  margin-bottom: 0.75rem;
-  font-size: 1.4rem;
-  letter-spacing: 0.04em;
-}
-
-/* ---------- Hard return wedge ---------- */
-
-.hard-return {
-  margin: 2.25rem auto;
-  width: clamp(90px, 12vw, 140px);
-  opacity: 0.9;
-  line-height: 0;
-}
-
-.hard-return svg {
-  display: block;
-  width: 100%;
-  height: auto;
-}
-
-.hard-return polygon {
-  fill: #bd4f34;
+.chapter-copy:not(.chapter-copy--scroll-swap)+.chapter-copy--scroll-swap.media-block {
+  --media-block-top: calc(var(--media-block-space-top) - var(--chapter-copy-space-bottom));
 }
 
 /* ---------- Breakout media ---------- */
 
-.media-breakout {
-  margin-top: 4rem;
+.media-block {
+  --media-block-top: var(--media-block-space-top);
+  --media-block-bottom: var(--media-block-space-bottom);
+  --media-block-inline: var(--media-block-space-inline);
+  --media-block-caption-offset: var(--media-block-caption-gap);
+}
+
+.media-breakout.media-block {
+  margin: var(--media-block-top) 0 var(--media-block-bottom);
 }
 
 .media-breakout-maps {
@@ -649,7 +365,7 @@ figure {
 }
 
 .media-breakout figcaption {
-  margin: 1.5rem 0 3rem 0;
+  margin: var(--media-block-caption-offset, 1.5rem) 0 0;
   font-size: 0.95rem;
   opacity: 0.75;
   text-align: left;
@@ -695,12 +411,8 @@ figure {
 .wide-media--scroll-swap-abandoned,
 .wide-media--scroll-swap-fort {
   aspect-ratio: 1 / 1;
-  width: min(1100px, calc(100vw - 3rem), calc(100vh - 6rem));
-  max-width: none;
-}
-
-.wide-media--scroll-swap-fort {
-  width: min(960px, calc(100vw - 4rem), calc(100vh - 10rem));
+  width: min(1100px, calc(100vw - 3rem));
+  max-width: 1100px;
 }
 
 .scroll-swap__stage {
@@ -710,7 +422,7 @@ figure {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 4rem 1.5rem 3rem;
+  padding: var(--media-block-top, 4rem) var(--media-block-inline, 1.5rem) var(--media-block-bottom, 3rem);
   background: var(--bg);
   z-index: 1;
 }
@@ -748,21 +460,29 @@ figure {
 }
 
 @media (max-width: 700px) {
+  :root {
+    --chapter-copy-space-bottom: 2rem;
+    --chapter-copy-space-inline: 1rem;
+  }
+
+  .media-block {
+    --media-block-top: 3rem;
+    --media-block-bottom: 2rem;
+    --media-block-inline: 1rem;
+  }
+
   .wide-media--urban-breakout {
     width: min(calc(100vw - 2rem), calc(100vh - 4rem));
   }
 
   .wide-media--scroll-swap-abandoned,
   .wide-media--scroll-swap-fort {
-    width: min(calc(100vw - 2rem), calc(100vh - 4rem));
-  }
-
-  .wide-media--scroll-swap-fort {
-    width: min(calc(100vw - 2.5rem), calc(100vh - 6rem));
+    width: min(1100px, calc(100vw - 3rem));
+    max-width: 1100px;
   }
 
   .scroll-swap__stage {
-    padding: 3rem 1rem 2rem;
+    padding: var(--media-block-top, 3rem) var(--media-block-inline, 1rem) var(--media-block-bottom, 2rem);
   }
 
   .scroll-swap__track {
@@ -818,7 +538,6 @@ figure {
 .wide-media--three-up {
   display: grid;
   gap: 1rem;
-  margin-top: 4rem;
 }
 
 .wide-media__item {
@@ -924,19 +643,16 @@ figure {
   line-height: 1.6;
   opacity: 0.85;
   margin: 0;
-  font-family: "franklin-gothic-urw-cond", sans-serif;
+  font-family: "franklin-gothic-urw", sans-serif;
 }
 
 .credits__text strong {
   font-weight: 700;
-  letter-spacing: 0.04em;
-  font-family: "franklin-gothic-urw-cond", sans-serif;
 }
 
-.credits__text__author strong {
+.credits__text__author {
+  font-family: "franklin-gothic-urw", sans-serif;
   font-weight: 700;
-  letter-spacing: 0.02em;
-  font-family: "franklin-gothic-urw-cond", sans-serif;
 }
 
 .credits__spaced {
