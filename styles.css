@@ -52,8 +52,11 @@ p {
 }
 
 a {
-  color: #d77c65;
-  font-weight: bold;
+  color: #fff;
+  text-decoration-line: underline;
+  text-decoration-style: solid;
+  text-decoration-thickness: 0.75px;
+  text-underline-offset: 3px;
 }
 
 hr {
@@ -65,12 +68,22 @@ a:hover {
   color: #fff;
 }
 
-a.readmore {
-  font-family: "franklin-gothic-urw", sans-serif;
-  text-underline-offset: 4px;
-  text-decoration-style: dotted;
-  font-size: 1rem;
-  color: #bd4f34;
+.span-box-green,
+.span-box-rose {
+  padding: 0.08em 0.28em;
+  border: 1px solid;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+}
+
+.span-box-green {
+  border-color: #58997A;
+  background: rgb(88 153 122 / 0.25);
+}
+
+.span-box-rose {
+  border-color: #7A5457;
+  background: rgb(122 84 87 / 0.25);
 }
 
 /* ---------- Hero (short editorial video header) ---------- */

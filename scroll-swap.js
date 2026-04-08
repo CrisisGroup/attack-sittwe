@@ -112,7 +112,8 @@
       if (!sources.length) return;
 
       const trackRect = track.getBoundingClientRect();
-      const trackProgress = Math.min(Math.max((triggerLine - trackRect.top) / trackRect.height, 0), 0.999);
+      const trackHeight = Math.max(trackRect.height, 1);
+      const trackProgress = Math.min(Math.max((triggerLine - trackRect.top) / trackHeight, 0), 0.999);
       const nextIndex = trackRect.top <= triggerLine
         ? Math.min(Math.floor(trackProgress * (sources.length - 1)) + 1, sources.length - 1)
         : 0;
