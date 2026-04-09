@@ -555,10 +555,13 @@ figure {
   gap: 1rem;
 }
 
+.wide-media__top-row .wide-media__item {
+  aspect-ratio: 5 / 3;
+}
+
 .wide-media__top-row img {
   width: 100%;
-  aspect-ratio: auto;
-  height: auto;
+  height: 100%;
   object-fit: contain;
 }
 
