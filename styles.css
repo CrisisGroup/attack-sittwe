@@ -385,8 +385,8 @@ figure {
 }
 
 .wide-media--urban-breakout {
-  width: min(1100px, calc(100vw - 3rem), calc(100vh - 6rem));
-  max-width: none;
+  width: min(1100px, calc(100vw - 3rem));
+  max-width: 1100px;
 }
 
 .wide-media img,
@@ -472,7 +472,8 @@ figure {
   }
 
   .wide-media--urban-breakout {
-    width: min(calc(100vw - 2rem), calc(100vh - 4rem));
+    width: min(1100px, calc(100vw - 3rem));
+    max-width: 1100px;
   }
 
   .wide-media--scroll-swap-abandoned,
